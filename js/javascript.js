@@ -1,32 +1,23 @@
-window.onload = function() {
-    
-    writeInscription(0);
-
-}
-
-function writeInscription(a) {
-    let number = a;
+let writeInscription = function(number,textobject) {
     
     let outputField = document.getElementById('overwrite');
 
-    const textobject = "TALK IS CHEAP SHOW ME THE CODE - Linus Tovalds";
-
-    if(number > textobject.length) {
-        remove();
-    }
-    else {
-        let intervalwrite = setInterval(overwrite,200);
-    }
+    let intervalwrite = setInterval(overwrite,100);
+    
 
     function overwrite() {
-
-        if(number > textobject.length) {
-            clearInterval(interval);
+        if(number > textobject.length-1) {
+            remove(number,textobject);
+            clearInterval(intervalwrite);
         }
         else {
             outputField.innerHTML += textobject.charAt(number);
-        
             number++;
         }
     }
-} 
+
+    function remove(number,textobject) {
+        alert(number,textobject);
+    }
+}
+writeInscription(0,"TALK IS CHEAP SHOW ME THE CODE - Linus Tovalds");
