@@ -1,16 +1,14 @@
 //roulette wheel
 
 var credits = 100; // Money given for start game
-
 var winPkt = 0; // Credits give out for win
-
 var correct = true;  // Bool to correct of input
 
 let button = document.getElementsByClassName('button');
 let output = document.getElementsByClassName('output');
 let score = document.getElementsByClassName('score');
 
-// Check if we have credits
+// Check possession of credits
 
 let game = () => {
 
@@ -27,11 +25,13 @@ let game = () => {
 }
 
 let trueGame = () => {
+
+    // Array to attribution color to specyfic number
     
     const colors = ['green','red','black','red','black','red','black','red','black','red','black','black','red','black','red','black','red','black','red','red','black','red','black','red','black','red','black','red','black','black','red','black','red','black','red','black','red'];
 
 
-    // Generate radom number and definition of number 
+    // Generate radom number and definition of this number 
 
     class Number {
         constructor() {
@@ -71,7 +71,7 @@ let trueGame = () => {
     score[5].innerHTML = credits + ' pln';
 
 
-    // Get input value form page
+    // Get introduced value form page
 
     class YourBetClass {
         constructor(input) {
