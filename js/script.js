@@ -6,6 +6,7 @@ var winPkt = 0; // Credits give out for win
 
 var correct = true;  // Bool to correct of input
 
+let button = document.getElementsByClassName('button');
 let output = document.getElementsByClassName('output');
 let score = document.getElementsByClassName('score');
 
@@ -13,12 +14,15 @@ let score = document.getElementsByClassName('score');
 
 let game = () => {
 
-    if(credits <= 0)
-        document.getElementsByClassName('button')[0].innerHTML = '<p class="btn btn-danger">Nie masz pieniędzy</p>';
-
-    else {
-        trueGame();
+    if(credits <= 0) {
         correct = true;
+        winPkt = 0;
+        button[0].innerHTML = '<p class="btn btn-danger">Nie masz pieniędzy</p>';
+    }
+    else {
+        correct = true;
+        winPkt = 0;
+        trueGame();
     }
 }
 
@@ -82,11 +86,12 @@ let trueGame = () => {
 
         checkBet(n) {
             if(credits >= n) {
-                return n;
-            }
-            else if(n == '' || n == null) {
-                correct = false;
-                return '<p class="text-danger">You have not enough money</p>';
+            
+                if(n == '' || n == null) {
+                    correct = false;
+                    return '<p class="text-danger">You didn\'t enter your bet</p>';
+                }
+                else return n;
             }
             else {
                 correct = false;
@@ -104,10 +109,6 @@ let trueGame = () => {
                 return n;
             }
             else if(n == '' || n == null) return n;
-            else if(n > 36) {
-                correct = false;
-                return '<p class="text-danger">Wrong number</p>';
-            }
             else {
                 correct = false;
                 return '<p class="text-danger">Wrong number</p>';
@@ -189,5 +190,4 @@ let trueGame = () => {
         output[3].innerHTML = yourBetObj.color;
         output[4].innerHTML = yourBetObj.numberPart;
     }
-
 }
