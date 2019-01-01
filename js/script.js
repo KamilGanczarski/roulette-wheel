@@ -75,22 +75,20 @@ let trueGame = () => {
     class YourBetClass {
         constructor(input) {
             this.bet = this.checkBet(input[0]);
+            this.enoughMoney = 0;
             this.number = this.checkNumber(input[1]);
             this.type = this.checkType(input[2]);
             this.color = this.checkColor(input[3]);
             this.numberPart = this.checkNumberPart(input[4]);
-            this.checkAll = 0;
-            this.error;
         }
 
         checkBet(n) {
             if(credits >= n) {
-            
                 if(n == '' || n == null) {
                     correct = false;
                     return '<p class="text-danger">You didn\'t enter your bet</p>';
                 }
-                else return n;
+                else return parseInt(n);
             }
             else {
                 correct = false;
@@ -98,13 +96,19 @@ let trueGame = () => {
             }
         }
 
+        enoughMoneyFunc() { // increasement enough money
+            this.enoughMoney += this.bet;
+        }
+
         checkNumber(n) {
             if(random.number == n) {
-                winPkt += parseInt(this.bet) * 35;
+                this.enoughMoneyFunc();
+                winPkt += this.bet * 35;
                 return n;
             }
             else if(n >= 1 && n <= 36) {
-                winPkt -= parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt -= this.bet;
                 return n;
             }
             else if(n == '' || n == null) return n;
@@ -116,36 +120,42 @@ let trueGame = () => {
 
         checkType(n) {
             if(random.type == n) {
-                winPkt += parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt += this.bet;
                 return n;
             }
             else if(n == '' || n == null) return n;
             else  {
-                winPkt -= parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt -= this.bet;
                 return n;
             }
         }
 
         checkColor(n) {
             if(random.color == n) {
-                winPkt += parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt += this.bet;
                 return n;
             }
             else if(n == '' || n == null) return n;
             else {
-                winPkt -= parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt -= this.bet;
                 return n;
             }
         }
 
         checkNumberPart(n) {
             if(random.numberPart == n) {
-                winPkt += parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt += this.bet;
                 return n;
             }
             else if(n == '' || n == null) return n;
             else {
-                winPkt -= parseInt(this.bet);
+                this.enoughMoneyFunc();
+                winPkt -= this.bet;
                 return n;
             }
         }
@@ -169,14 +179,23 @@ let trueGame = () => {
         output[3].innerHTML = yourBetObj.color;
         output[4].innerHTML = yourBetObj.numberPart;
 
-        credits += winPkt;
-
-        score[5].innerHTML = credits + ' pln';
-
-        
         for(i=0; i<=4; i++)
             document.getElementsByClassName('input')[i].value = '';
+
+        if(yourBetObj.enoughMoney > credits) {
+            output[0].innerHTML = '<p class="text-danger">You have not enough money</p>';
+
+            for(i=0; i<=4; i++) 
+                score[i].innerHTML = '';
+        }
+            
+
+        else {
+            credits += winPkt;
+            score[5].innerHTML = credits + ' pln';
+        }
     }
+
     else {
         for(i=0; i<=4; i++) {
             document.getElementsByClassName('input')[i].value = '';
