@@ -1,7 +1,7 @@
 //roulette wheel
 
 var credits = 100; // Money given for start game
-var winPkt = 0; // Credits give out for win
+var winPkt = 0; // Credits give out after win
 var correct = true;  // Bool to correct of input
 
 let button = document.getElementsByClassName('button');
@@ -15,7 +15,7 @@ let game = () => {
     if(credits <= 0) {
         correct = true;
         winPkt = 0;
-        button[0].innerHTML = '<p class="btn btn-danger">Nie masz pieniędzy</p>';
+        button[0].innerHTML = '<p class="btn btn-danger">You haven\'t got any money</p>';
     }
     else {
         correct = true;
@@ -31,7 +31,7 @@ let trueGame = () => {
     const colors = ['green','red','black','red','black','red','black','red','black','red','black','black','red','black','red','black','red','black','red','red','black','red','black','red','black','red','black','red','black','black','red','black','red','black','red','black','red'];
 
 
-    // Generate radom number and definition of this number 
+    // Generate radom number and definition this number 
 
     class Number {
         constructor() {
@@ -48,8 +48,7 @@ let trueGame = () => {
         }
 
         checkColor(n) {
-            if(colors[n] == 'red') return 'red';
-            if(colors[n] == 'black') return 'black';
+            return colors[n];
         }
 
         checkNumberPart(n) {
@@ -152,7 +151,7 @@ let trueGame = () => {
         }
     }
 
-    // An array for storing user data
+    // An array for storing users data
 
     let input = [];
     for(i=0; i<=4; i++)
